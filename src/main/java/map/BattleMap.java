@@ -69,4 +69,8 @@ public class BattleMap {
   public Integer getAt(Point p) {
     return map.get(p.to1D(size));
   }
+
+  public void printMap() {
+    map.forEach(System.out::println);
+  }
 }
