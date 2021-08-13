@@ -17,19 +17,27 @@ public class BattleMap {
     this.map.addAll(Collections.nCopies(size * size, 0));
   }
 
-  public List<Point> create_ships_positions(Point p, Integer length, Boolean is_Horizontal) {
+  public List<Integer> getMap() {
+    return map;
+  }
+
+  public Integer getSize() {
+    return size;
+  }
+
+  public List<Point> createShipsPositions(Point p, Integer length, Boolean is_Horizontal) {
     int i = 0;
     List<Point> list = new ArrayList<>();
     while (i < length) {
       if (is_Horizontal) {
         if (p.y + i > size)
-          throw new IndexOutOfBoundsException("This position is out of map size");
+          throw new IndexOutOfBoundsException("The ship positions that rely on a given length are out of the map size");
         Point point1 = new Point(p.x, p.y + i);
         list.add(point1);
         i++;
       } else {
         if (p.x + i >= size)
-          throw new IndexOutOfBoundsException("This position is out of map size");
+          throw new IndexOutOfBoundsException("The ship positions that rely on a given length are out of the map size");
         Point point1 = new Point(p.x + i, p.y);
         list.add(point1);
         i++;
@@ -38,34 +46,24 @@ public class BattleMap {
     return list;
   }
 
-  public boolean check_position_employment(Point point) {
-    if (getAt(point) == 1) {
-      return true;
-    }
-    return false;
+  public boolean isBusy(Point point) {
+    return getAt(point) == 1;
   }
 
-  public boolean is_sunk(List<Point> list) {
-    int qount = 0;
-    for (Point point : list) {
-      if (getAt(point) == 2) {
-        qount++;
-      }
-    }
-    if (qount == list.size()) {
-      return true;
-    }
-    return false;
+  public boolean isSunk(List<Point> list) {
+    return list.stream().allMatch(point -> getAt(point) == 2);
   }
 
   public boolean contains(List<Point> pointList, Point specPoint) {
-    boolean is_contain = false;
-    for (Point point : pointList) {
-      if (point.x == specPoint.x && point.y == specPoint.y) {
-        is_contain = true;
-      }
-    }
-    return is_contain;
+    return pointList.contains(specPoint);
+  }
+
+  public void putShip(Point p) {
+    map.add(p.to1D(size), 1);
+  }
+
+  public void changeShipState(Point point) {
+    map.add(point.to1D(size), 2);
   }
 
   public Integer getAt(Point p) {
