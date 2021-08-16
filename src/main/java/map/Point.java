@@ -24,18 +24,11 @@ public class Point {
 
   @Override
   public boolean equals(Object point) {
+    if (point == null || point.getClass() != this.getClass())
+      return false;
     if (this == point)
       return true;
-    if (point == null)
-      return false;
-    if (getClass() != point.getClass())
-      return false;
-    Point other = (Point) point;
-    if (x != other.x)
-      return false;
-
-    if (y == (other.y))
-      return true;
-    return false;
+    Point p = (Point) point;
+    return ((this.x == p.x) && (this.y == p.y));
   }
 }
