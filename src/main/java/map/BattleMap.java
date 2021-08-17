@@ -22,7 +22,7 @@ public class BattleMap {
   }
 
   public boolean isBusy(Point point) {
-    return getAt(point) == 1;
+    return (getAt(point) == 1 || getAt(point) == 2);
   }
 
   public boolean isSunk(List<Point> list) {
@@ -41,15 +41,15 @@ public class BattleMap {
     return map.get(p.to1D(size));
   }
 
-  public void printMap() {
-    map.forEach(System.out::println);
+  public void changeShipState(Point point) {
+    map.add(point.to1D(size), 2);
   }
 
   @Override
   public String toString() {
     String result = "";
     for (Integer i : map) {
-      result = result + i+ " ";
+      result = result + i + " ";
     }
     return result;
   }

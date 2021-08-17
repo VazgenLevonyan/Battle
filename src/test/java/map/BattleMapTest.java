@@ -2,7 +2,6 @@ package map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -57,16 +56,6 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("The coordinate point must be busy")
-  void isBusy() {
-    BattleMap battleMap = new BattleMap(5);
-    Point point = new Point(2, 2);
-    battleMap.putShip(point);
-
-    assertTrue(battleMap.isBusy(point), "This coordinate is not busy");
-  }
-
-  @Test
   @DisplayName("List of Points must contain a specific Point")
   void contains() {
     BattleMap battleMap = new BattleMap(5);
@@ -79,6 +68,71 @@ public class BattleMapTest {
     pointList.add(point1);
     pointList.add(point2);
 
-    assertTrue(battleMap.contains(pointList, specPoint), "List of points does not contain specPoint");
+    assertEquals(true, battleMap.contains(pointList, specPoint), "List of points does not contain specPoint");
+  }
+
+  @Test
+  @DisplayName("The coordinate point must be busy if a ship state is not hit")
+  void isBusyInNormalState() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    battleMap.putShip(point);
+
+    assertEquals(true, battleMap.isBusy(point), "This coordinate is not busy");
+  }
+
+  @Test
+  @DisplayName("The coordinate point must be busy if a ship state is hit or sunk")
+  void isBusyInHitState() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    battleMap.putShip(point);
+    battleMap.changeShipState(point);
+
+    assertEquals(true, battleMap.isBusy(point), "This coordinate is not busy");
+  }
+
+  @Test
+  @DisplayName("The coordinate point must not be busy if there is no ship")
+  void isBusyInEmptyState() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+
+    assertEquals(false, battleMap.isBusy(point), "This coordinate  is not busy");
+  }
+
+  @Test
+  @DisplayName("The ship state must be sunk if all coordinate values are 2")
+  void isSunk() {
+    BattleMap battleMap = new BattleMap(5);
+    List<Point> list = new ArrayList<>();
+    Point point = new Point(1, 1);
+    Point point1 = new Point(1, 2);
+    Point point2 = new Point(1, 3);
+    battleMap.changeShipState(point);
+    battleMap.changeShipState(point1);
+    battleMap.changeShipState(point2);
+    list.add(point);
+    list.add(point1);
+    list.add(point2);
+
+    assertEquals(true, battleMap.isSunk(list), "The ship state is not sunk");
+  }
+
+  @Test
+  @DisplayName("The ship state must be sunk if all coordinate values are 2")
+  void isNotSunk() {
+    BattleMap battleMap = new BattleMap(5);
+    List<Point> list = new ArrayList<>();
+    Point point = new Point(1, 1);
+    Point point1 = new Point(1, 2);
+    Point point2 = new Point(1, 3);
+    battleMap.changeShipState(point);
+    battleMap.changeShipState(point2);
+    list.add(point);
+    list.add(point1);
+    list.add(point2);
+
+    assertEquals(false, battleMap.isSunk(list), "The ship state is not sunk");
   }
 }
