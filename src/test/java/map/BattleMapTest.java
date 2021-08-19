@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
@@ -46,93 +44,174 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("In coordinate p the number must be 1")
-  void checkSpecificPosition() {
-    BattleMap battleMap = new BattleMap(5);
-    Point p = new Point(2, 2);
-    battleMap.putShip(p);
-
-    assertEquals(1, battleMap.getAt(p), "No ship found at " + p);
-  }
-
-  @Test
-  @DisplayName("List of Points must contain a specific Point")
-  void contains() {
-    BattleMap battleMap = new BattleMap(5);
-    Point point = new Point(1, 1);
-    Point point1 = new Point(1, 2);
-    Point point2 = new Point(1, 3);
-    Point specPoint = new Point(1, 2);
-    List<Point> pointList = new ArrayList<>();
-    pointList.add(point);
-    pointList.add(point1);
-    pointList.add(point2);
-
-    assertEquals(true, battleMap.contains(pointList, specPoint), "List of points does not contain specPoint");
-  }
-
-  @Test
-  @DisplayName("The coordinate point must be busy if a ship state is not hit")
-  void isBusyInNormalState() {
+  @DisplayName("Test on downgrading the cell state from 1 to 0")
+  void setCellStateOnDowngradingFrom1To0() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
-    battleMap.putShip(point);
+    States healthyCellState = States.HEALTHY;
+    States freeCellState = States.FREE;
+    battleMap.setCellState(point, healthyCellState);
 
-    assertEquals(true, battleMap.isBusy(point), "This coordinate is not busy");
+    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, freeCellState));
   }
 
   @Test
-  @DisplayName("The coordinate point must be busy if a ship state is hit or sunk")
-  void isBusyInHitState() {
+  @DisplayName("Test on downgrading the cell state from 2 to 1")
+  void setCellStateOnDowngradingFrom2To1() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
-    battleMap.putShip(point);
-    battleMap.changeShipState(point);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState1 = States.HIT;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState1);
 
-    assertEquals(true, battleMap.isBusy(point), "This coordinate is not busy");
+    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, healthyCellState));
   }
 
   @Test
-  @DisplayName("The coordinate point must not be busy if there is no ship")
-  void isBusyInEmptyState() {
+  @DisplayName("Test on downgrading the cell state from 2 to 0")
+  void setCellStateOnDowngradingFrom2To0() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    States freeCellState = States.FREE;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
 
-    assertEquals(false, battleMap.isBusy(point), "This coordinate  is not busy");
+    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, freeCellState));
   }
 
   @Test
-  @DisplayName("The ship state must be sunk if all coordinate values are 2")
-  void isSunk() {
+  @DisplayName("Test on downgrading the cell state from 3 to 2")
+  void setCellStateOnDowngradingFrom3To2() {
     BattleMap battleMap = new BattleMap(5);
-    List<Point> list = new ArrayList<>();
-    Point point = new Point(1, 1);
-    Point point1 = new Point(1, 2);
-    Point point2 = new Point(1, 3);
-    battleMap.changeShipState(point);
-    battleMap.changeShipState(point1);
-    battleMap.changeShipState(point2);
-    list.add(point);
-    list.add(point1);
-    list.add(point2);
+    Point point = new Point(2, 2);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    States sunkCellStates = States.SUNK;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+    battleMap.setCellState(point, sunkCellStates);
 
-    assertEquals(true, battleMap.isSunk(list), "The ship state is not sunk");
+    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, hitCellState));
   }
 
   @Test
-  @DisplayName("The ship state must be sunk if all coordinate values are 2")
-  void isNotSunk() {
+  @DisplayName("Test on downgrading the cell state from 3 to 1")
+  void setCellStateOnDowngradingFrom3To1() {
     BattleMap battleMap = new BattleMap(5);
-    List<Point> list = new ArrayList<>();
-    Point point = new Point(1, 1);
-    Point point1 = new Point(1, 2);
-    Point point2 = new Point(1, 3);
-    battleMap.changeShipState(point);
-    battleMap.changeShipState(point2);
-    list.add(point);
-    list.add(point1);
-    list.add(point2);
+    Point point = new Point(2, 2);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    States sunkCellStates = States.SUNK;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+    battleMap.setCellState(point, sunkCellStates);
 
-    assertEquals(false, battleMap.isSunk(list), "The ship state is not sunk");
+    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, healthyCellState));
+  }
+
+  @Test
+  @DisplayName("Test on downgrading the cell state from 3 to 0")
+  void setCellStateOnDowngradingFrom3To0() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    States freeCellState = States.FREE;
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    States sunkCellStates = States.SUNK;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+    battleMap.setCellState(point, sunkCellStates);
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, freeCellState));
+  }
+
+  @Test
+  @DisplayName("An empty cell cannot be set to hit or sunk")
+  void setCellStateOnUpgradingFrom0To2() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    States hitCellState = States.HIT;
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, hitCellState));
+  }
+
+  @Test
+  @DisplayName("An empty cell cannot be set to hit or sunk")
+  void setCellStateOnUpgradingFrom0To3() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    States sunkCellState = States.SUNK;
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, sunkCellState));
+  }
+
+  @Test
+  @DisplayName("An empty cell can be set as healthy")
+  void setCellStateToHealthyState() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    States healthyCellState = States.HEALTHY;
+    battleMap.setCellState(point, healthyCellState);
+
+    assertEquals(healthyCellState.getValue(), battleMap.getAt(point), "No ship found at " + point);
+  }
+
+  @Test
+  @DisplayName("An healthy cell can be set as hit")
+  void setCellStateToHitState() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+
+    assertEquals(hitCellState.getValue(), battleMap.getAt(point), "No hit position found at " + point);
+  }
+
+  @Test
+  @DisplayName("An hit cell can be set as sunk")
+  void setCellStateToSunkState() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    States sunkCellState = States.SUNK;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+    battleMap.setCellState(point, sunkCellState);
+
+    assertEquals(sunkCellState.getValue(), battleMap.getAt(point), "No sunk position found at " + point);
+  }
+
+  @Test
+  @DisplayName("We can not set repeatable state ")
+  void setRepeatableCellState() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, hitCellState));
+  }
+
+  @Test
+  @DisplayName("An healthy cell can be set as sunk only for ace")
+  void setCellStateToSunkStateOnlyForAce() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    States sunkCellState = States.SUNK;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+    battleMap.setCellState(point, sunkCellState);
+
+    assertEquals(sunkCellState.getValue(), battleMap.getAt(point), "No sunk position found at " + point);
   }
 }

@@ -29,28 +29,19 @@ public class BattleMap {
     return list.stream().allMatch(point -> getAt(point) == 2);
   }
 
-  public boolean contains(List<Point> pointList, Point specPoint) {
-    return pointList.contains(specPoint);
-  }
-
-  public void putShip(Point p) {
-    map.add(p.to1D(size), 1);
-  }
-
   public Integer getAt(Point p) {
     return map.get(p.to1D(size));
   }
 
-  public void changeShipState(Point point) {
-    map.add(point.to1D(size), 2);
-  }
+  public void setCellState(Point point, States shipState) {
+    if (shipState.getValue() < getAt(point))
+      throw new InvalidParameterException("Something goes wrong");
+    if (shipState.getValue() - getAt(point) > 1)
+      throw new InvalidParameterException("Something goes wrong");
+    if (shipState.getValue() - getAt(point) == 0)
+      throw new InvalidParameterException("Something goes wrong");
 
-  @Override
-  public String toString() {
-    String result = "";
-    for (Integer i : map) {
-      result = result + i + " ";
-    }
-    return result;
+    if (shipState.getValue() - getAt(point) == 1)
+      map.add(point.to1D(size), shipState.getValue());
   }
 }
