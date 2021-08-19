@@ -44,8 +44,8 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on downgrading the cell state from 1 to 0")
-  void setCellStateOnDowngradingFrom1To0() {
+  @DisplayName("Test on changing the cell state from Healthy to Free")
+  void setCellStateChangingFromHealthyToFree() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
@@ -56,8 +56,8 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on downgrading the cell state from 2 to 1")
-  void setCellStateOnDowngradingFrom2To1() {
+  @DisplayName("Test on changing the cell state from Hit to Healthy")
+  void setCellStateChangingFromHitToHealthy() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
@@ -69,8 +69,8 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on downgrading the cell state from 2 to 0")
-  void setCellStateOnDowngradingFrom2To0() {
+  @DisplayName("Test on changing the cell state from Hit to Free")
+  void setCellStateChangingFromHitToFree() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
@@ -83,8 +83,8 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on downgrading the cell state from 3 to 2")
-  void setCellStateOnDowngradingFrom3To2() {
+  @DisplayName("Test on changing the cell state from Sunk to Hit")
+  void setCellStateChangingFromSunkToHit() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
@@ -98,8 +98,8 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on downgrading the cell state from 3 to 1")
-  void setCellStateOnDowngradingFrom3To1() {
+  @DisplayName("Test on changing the cell state from Sunk to Healthy")
+  void setCellStateChangingFromSunkToHealthy() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
@@ -113,8 +113,8 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on downgrading the cell state from 3 to 0")
-  void setCellStateOnDowngradingFrom3To0() {
+  @DisplayName("Test on changing the cell state from Sunk to Free")
+  void setCellStateChangingFromSunkToFree() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States freeCellState = States.FREE;
@@ -129,8 +129,8 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("An empty cell cannot be set to hit or sunk")
-  void setCellStateOnUpgradingFrom0To2() {
+  @DisplayName("An empty cell cannot be set to hit")
+  void setCellStateChangingFromFreeToHit() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States hitCellState = States.HIT;
@@ -139,8 +139,8 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("An empty cell cannot be set to hit or sunk")
-  void setCellStateOnUpgradingFrom0To3() {
+  @DisplayName("An empty cell cannot be set to sunk")
+  void setCellStateChangingFromFreeToSunk() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States sunkCellState = States.SUNK;
@@ -150,7 +150,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("An empty cell can be set as healthy")
-  void setCellStateToHealthyState() {
+  void setCellStateChangingFromFreeToHealthy() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States healthyCellState = States.HEALTHY;
@@ -161,7 +161,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("An healthy cell can be set as hit")
-  void setCellStateToHitState() {
+  void setCellStateChangingFromHealthyToHit() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States healthyCellState = States.HEALTHY;
@@ -174,7 +174,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("An hit cell can be set as sunk")
-  void setCellStateToSunkState() {
+  void setCellStateChangingFromHitToSunk() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States healthyCellState = States.HEALTHY;
@@ -188,21 +188,8 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("We can not set repeatable state ")
-  void setRepeatableCellState() {
-    BattleMap battleMap = new BattleMap(5);
-    Point point = new Point(1, 1);
-    States healthyCellState = States.HEALTHY;
-    States hitCellState = States.HIT;
-    battleMap.setCellState(point, healthyCellState);
-    battleMap.setCellState(point, hitCellState);
-
-    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, hitCellState));
-  }
-
-  @Test
-  @DisplayName("An healthy cell can be set as sunk only for ace")
-  void setCellStateToSunkStateOnlyForAce() {
+  @DisplayName("An healthy cell can be set as sunk only for lone")
+  void setCellStateChangingFromHealthyToSunkOnlyForLone() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States healthyCellState = States.HEALTHY;

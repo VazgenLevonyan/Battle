@@ -7,9 +7,9 @@ enum States {
     this.i = i;
   }
 
-public int  getValue(){
-  return i;
-}
+  public int getValue() {
+    return i;
+  }
 
   public final int i;
 }
