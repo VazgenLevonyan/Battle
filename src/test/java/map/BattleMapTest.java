@@ -44,7 +44,7 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on changing the cell state from Healthy to Free")
+  @DisplayName("A Healthy cell can not be changed to Free")
   void setCellStateChangingFromHealthyToFree() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
@@ -56,7 +56,7 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on changing the cell state from Hit to Healthy")
+  @DisplayName("A Hit cell can not be changed to Healthy")
   void setCellStateChangingFromHitToHealthy() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
@@ -69,7 +69,7 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on changing the cell state from Hit to Free")
+  @DisplayName("A Hit cell can not be changed to Free")
   void setCellStateChangingFromHitToFree() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
@@ -83,7 +83,7 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on changing the cell state from Sunk to Hit")
+  @DisplayName("A Sunk cell can not be changed to Hit")
   void setCellStateChangingFromSunkToHit() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
@@ -98,7 +98,7 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on changing the cell state from Sunk to Healthy")
+  @DisplayName("A Sunk cell can not be changed to Healthy")
   void setCellStateChangingFromSunkToHealthy() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
@@ -113,7 +113,7 @@ public class BattleMapTest {
   }
 
   @Test
-  @DisplayName("Test on changing the cell state from Sunk to Free")
+  @DisplayName("A Sunk cell can not ve changed to Free")
   void setCellStateChangingFromSunkToFree() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
