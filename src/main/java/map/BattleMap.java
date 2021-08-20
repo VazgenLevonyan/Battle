@@ -17,11 +17,15 @@ public class BattleMap {
     this.map.addAll(Collections.nCopies(size * size, 0));
   }
 
-  public void putShip(Point p) {
-    map.add(p.to1D(size), 1);
-  }
-
   public Integer getAt(Point p) {
     return map.get(p.to1D(size));
+  }
+
+  public void setCellState(Point point, States shipState) {
+    if (shipState.getValue() - getAt(point) == 1) {
+      map.add(point.to1D(size), shipState.getValue());
+    } else {
+      throw new InvalidParameterException("Something goes wrong");
+    }
   }
 }
