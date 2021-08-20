@@ -201,4 +201,52 @@ public class BattleMapTest {
 
     assertEquals(sunkCellState.getValue(), battleMap.getAt(point), "No sunk position found at " + point);
   }
+
+  @Test
+  @DisplayName("A Healthy cell state must be busy")
+  void healthyCellStateMustBeBusy() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    States healthyCellState = States.HEALTHY;
+    battleMap.setCellState(point, healthyCellState);
+
+    assertEquals(true, battleMap.isBusy(point), "This position is not busy");
+  }
+
+  @Test
+  @DisplayName("A Hit cell state must be busy")
+  void hitCellStateMustBeBusy() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+
+    assertEquals(true, battleMap.isBusy(point), "This position is not busy");
+  }
+
+  @Test
+  @DisplayName("A Sunk cell state must be busy")
+  void sunkCellStateMustBeBusy() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    States sunkCellState = States.SUNK;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+    battleMap.setCellState(point, sunkCellState);
+
+    assertEquals(true, battleMap.isBusy(point), "This position is not busy");
+  }
+
+  @Test
+  @DisplayName("A Free cell state must not be busy")
+  void freeCellStateMustNotBeBusy() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+
+    assertEquals(false, battleMap.isBusy(point), "This position is busy");
+  }
 }

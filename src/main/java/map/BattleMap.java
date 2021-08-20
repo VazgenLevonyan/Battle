@@ -28,4 +28,9 @@ public class BattleMap {
       throw new InvalidParameterException("Something goes wrong");
     }
   }
+
+  public boolean isBusy(Point point) {
+    return (getAt(point) == 1 || getAt(point) == 2 || getAt(point) == 3);
+  }
+
 }
