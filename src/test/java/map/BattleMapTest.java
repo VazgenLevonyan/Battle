@@ -3,6 +3,7 @@ package map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.lang.Thread.State;
 import java.security.InvalidParameterException;
 import java.util.stream.Collectors;
 
@@ -201,4 +202,53 @@ public class BattleMapTest {
 
     assertEquals(sunkCellState.getValue(), battleMap.getAt(point), "No sunk position found at " + point);
   }
+
+  @Test
+  @DisplayName("A empty cell state has to be free")
+  void checkTheCellStateItIsBusyOrNotWhenTheCellValueIs0() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+
+    assertEquals(false, battleMap.checkTheCellStateItIsBusyOrNot(point));
+  }
+
+  @Test
+  @DisplayName("A healthy cell state has to be busy")
+  void checkTheCellStateItIsBusyOrNotWhenTheCellValueIs1() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    States healthyCellState = States.HEALTHY;
+    battleMap.setCellState(point, healthyCellState);
+
+    assertEquals(true, battleMap.checkTheCellStateItIsBusyOrNot(point));
+  }
+
+  @Test
+  @DisplayName("A hit cell state has to be busy")
+  void checkTheCellStateItIsBusyOrNotWhenTheCellValueIs2() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+
+    assertEquals(true, battleMap.checkTheCellStateItIsBusyOrNot(point));
+  }
+
+  @Test
+  @DisplayName("A sunk cell state has to be busy")
+  void checkTheCellStateItIsBusyOrNotWhenTheCellValueIs3() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    States sunkCellState = States.SUNK;
+    battleMap.setCellState(point, healthyCellState);
+    battleMap.setCellState(point, hitCellState);
+    battleMap.setCellState(point, sunkCellState);
+
+    assertEquals(true, battleMap.checkTheCellStateItIsBusyOrNot(point));
+  }
+
 }

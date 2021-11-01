@@ -75,4 +75,5 @@ public class PointTest {
     Point point = new Point(1, 1);
     assertEquals(0, battleMap.getAt(point), "Point(1, 1) in a size 3 battlefield is 4 in 1D");
   }
+
 }
