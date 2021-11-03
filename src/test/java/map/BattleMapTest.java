@@ -3,7 +3,6 @@ package map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.lang.Thread.State;
 import java.security.InvalidParameterException;
 import java.util.stream.Collectors;
 
@@ -209,7 +208,7 @@ public class BattleMapTest {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
 
-    assertEquals(false, battleMap.checkTheCellStateItIsBusyOrNot(point));
+    assertEquals(false, battleMap.checkTheCellStateItIsBusyOrNot(point), "An empty cell is busy");
   }
 
   @Test
@@ -220,7 +219,7 @@ public class BattleMapTest {
     States healthyCellState = States.HEALTHY;
     battleMap.setCellState(point, healthyCellState);
 
-    assertEquals(true, battleMap.checkTheCellStateItIsBusyOrNot(point));
+    assertEquals(true, battleMap.checkTheCellStateItIsBusyOrNot(point), "A healthy cell is not busy");
   }
 
   @Test
@@ -233,7 +232,7 @@ public class BattleMapTest {
     battleMap.setCellState(point, healthyCellState);
     battleMap.setCellState(point, hitCellState);
 
-    assertEquals(true, battleMap.checkTheCellStateItIsBusyOrNot(point));
+    assertEquals(true, battleMap.checkTheCellStateItIsBusyOrNot(point), "A hit cell is not busy");
   }
 
   @Test
@@ -248,6 +247,6 @@ public class BattleMapTest {
     battleMap.setCellState(point, hitCellState);
     battleMap.setCellState(point, sunkCellState);
 
-    assertEquals(true, battleMap.checkTheCellStateItIsBusyOrNot(point));
+    assertEquals(true, battleMap.checkTheCellStateItIsBusyOrNot(point), "A sunk cell state is not busy");
   }
 }
