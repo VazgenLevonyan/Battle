@@ -250,5 +250,4 @@ public class BattleMapTest {
 
     assertEquals(true, battleMap.checkTheCellStateItIsBusyOrNot(point));
   }
-
 }
