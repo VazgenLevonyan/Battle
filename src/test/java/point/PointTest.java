@@ -16,7 +16,6 @@ public class PointTest {
     BattleMap battleMap = new BattleMap(1);
     Point point = new Point(1, 1);
     assertThrows(IndexOutOfBoundsException.class, () -> battleMap.get_at(point));
-
   }
 
   @Test
@@ -40,7 +39,7 @@ public class PointTest {
   void b() {
     BattleMap battleMap = new BattleMap(10);
     Point point = new Point(10, 10);
-    
+
     assertThrows(IndexOutOfBoundsException.class, () -> battleMap.get_at(point));
   }
 
