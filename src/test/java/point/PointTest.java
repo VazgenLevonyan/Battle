@@ -15,8 +15,7 @@ public class PointTest {
   void a() {
     BattleMap battleMap = new BattleMap(1);
     Point point = new Point(1, 1);
-    assertThrows(IndexOutOfBoundsException.class, () -> battleMap.getAt(point));
-
+    assertThrows(IndexOutOfBoundsException.class, () -> battleMap.get_at(point));
   }
 
   @Test
@@ -24,7 +23,7 @@ public class PointTest {
   void e() {
     BattleMap battleMap = new BattleMap(1);
     Point point = new Point(0, 0);
-    assertEquals(0, battleMap.getAt(point), "Point(0, 0) in a size 1 battlefield isn't 0 in 1D");
+    assertEquals(0, battleMap.get_at(point), "Point(0, 0) in a size 1 battlefield isn't 0 in 1D");
   }
 
   @Test
@@ -32,7 +31,7 @@ public class PointTest {
   void f() {
     BattleMap battleMap = new BattleMap(2);
     Point point = new Point(0, 0);
-    assertEquals(0, battleMap.getAt(point), "Point(0, 0) in a size 2 battlefield isn't 0 in 1D");
+    assertEquals(0, battleMap.get_at(point), "Point(0, 0) in a size 2 battlefield isn't 0 in 1D");
   }
 
   @Test
@@ -40,8 +39,8 @@ public class PointTest {
   void b() {
     BattleMap battleMap = new BattleMap(10);
     Point point = new Point(10, 10);
-    
-    assertThrows(IndexOutOfBoundsException.class, () -> battleMap.getAt(point));
+
+    assertThrows(IndexOutOfBoundsException.class, () -> battleMap.get_at(point));
   }
 
   @Test
@@ -49,7 +48,7 @@ public class PointTest {
   void c() {
     BattleMap battleMap = new BattleMap(10);
     Point point = new Point(11, 9);
-    assertThrows(IndexOutOfBoundsException.class, () -> battleMap.getAt(point));
+    assertThrows(IndexOutOfBoundsException.class, () -> battleMap.get_at(point));
   }
 
   @Test
@@ -57,7 +56,7 @@ public class PointTest {
   void d() {
     BattleMap battleMap = new BattleMap(10);
     Point point = new Point(9, 10);
-    assertThrows(IndexOutOfBoundsException.class, () -> battleMap.getAt(point));
+    assertThrows(IndexOutOfBoundsException.class, () -> battleMap.get_at(point));
   }
 
   @Test
@@ -65,7 +64,7 @@ public class PointTest {
   void g() {
     BattleMap battleMap = new BattleMap(2);
     Point point = new Point(1, 1);
-    assertEquals(0, battleMap.getAt(point), "Point(1, 1) in a size 2 battlefield is 3 in 1D");
+    assertEquals(0, battleMap.get_at(point), "Point(1, 1) in a size 2 battlefield is 3 in 1D");
   }
 
   @Test
@@ -73,6 +72,6 @@ public class PointTest {
   void h() {
     BattleMap battleMap = new BattleMap(3);
     Point point = new Point(1, 1);
-    assertEquals(0, battleMap.getAt(point), "Point(1, 1) in a size 3 battlefield is 4 in 1D");
+    assertEquals(0, battleMap.get_at(point), "Point(1, 1) in a size 3 battlefield is 4 in 1D");
   }
 }

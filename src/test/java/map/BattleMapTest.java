@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.security.InvalidParameterException;
 import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +35,7 @@ public class BattleMapTest {
 
     for (int i = 0; i < size; i++) {
       for (int j = 0; j < size; j++) {
-        sum += battleMap.getAt(new Point(i, j));
+        sum += battleMap.get_at(new Point(i, j));
       }
     }
 
@@ -50,9 +49,9 @@ public class BattleMapTest {
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
     States freeCellState = States.FREE;
-    battleMap.setCellState(point, healthyCellState);
+    battleMap.set_cell_state(point, healthyCellState);
 
-    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, freeCellState));
+    assertThrows(InvalidParameterException.class, () -> battleMap.set_cell_state(point, freeCellState));
   }
 
   @Test
@@ -62,10 +61,10 @@ public class BattleMapTest {
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
     States hitCellState1 = States.HIT;
-    battleMap.setCellState(point, healthyCellState);
-    battleMap.setCellState(point, hitCellState1);
+    battleMap.set_cell_state(point, healthyCellState);
+    battleMap.set_cell_state(point, hitCellState1);
 
-    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, healthyCellState));
+    assertThrows(InvalidParameterException.class, () -> battleMap.set_cell_state(point, healthyCellState));
   }
 
   @Test
@@ -76,10 +75,10 @@ public class BattleMapTest {
     States healthyCellState = States.HEALTHY;
     States hitCellState = States.HIT;
     States freeCellState = States.FREE;
-    battleMap.setCellState(point, healthyCellState);
-    battleMap.setCellState(point, hitCellState);
+    battleMap.set_cell_state(point, healthyCellState);
+    battleMap.set_cell_state(point, hitCellState);
 
-    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, freeCellState));
+    assertThrows(InvalidParameterException.class, () -> battleMap.set_cell_state(point, freeCellState));
   }
 
   @Test
@@ -90,11 +89,11 @@ public class BattleMapTest {
     States healthyCellState = States.HEALTHY;
     States hitCellState = States.HIT;
     States sunkCellStates = States.SUNK;
-    battleMap.setCellState(point, healthyCellState);
-    battleMap.setCellState(point, hitCellState);
-    battleMap.setCellState(point, sunkCellStates);
+    battleMap.set_cell_state(point, healthyCellState);
+    battleMap.set_cell_state(point, hitCellState);
+    battleMap.set_cell_state(point, sunkCellStates);
 
-    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, hitCellState));
+    assertThrows(InvalidParameterException.class, () -> battleMap.set_cell_state(point, hitCellState));
   }
 
   @Test
@@ -105,11 +104,11 @@ public class BattleMapTest {
     States healthyCellState = States.HEALTHY;
     States hitCellState = States.HIT;
     States sunkCellStates = States.SUNK;
-    battleMap.setCellState(point, healthyCellState);
-    battleMap.setCellState(point, hitCellState);
-    battleMap.setCellState(point, sunkCellStates);
+    battleMap.set_cell_state(point, healthyCellState);
+    battleMap.set_cell_state(point, hitCellState);
+    battleMap.set_cell_state(point, sunkCellStates);
 
-    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, healthyCellState));
+    assertThrows(InvalidParameterException.class, () -> battleMap.set_cell_state(point, healthyCellState));
   }
 
   @Test
@@ -121,11 +120,11 @@ public class BattleMapTest {
     States healthyCellState = States.HEALTHY;
     States hitCellState = States.HIT;
     States sunkCellStates = States.SUNK;
-    battleMap.setCellState(point, healthyCellState);
-    battleMap.setCellState(point, hitCellState);
-    battleMap.setCellState(point, sunkCellStates);
+    battleMap.set_cell_state(point, healthyCellState);
+    battleMap.set_cell_state(point, hitCellState);
+    battleMap.set_cell_state(point, sunkCellStates);
 
-    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, freeCellState));
+    assertThrows(InvalidParameterException.class, () -> battleMap.set_cell_state(point, freeCellState));
   }
 
   @Test
@@ -135,7 +134,7 @@ public class BattleMapTest {
     Point point = new Point(1, 1);
     States hitCellState = States.HIT;
 
-    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, hitCellState));
+    assertThrows(InvalidParameterException.class, () -> battleMap.set_cell_state(point, hitCellState));
   }
 
   @Test
@@ -145,7 +144,7 @@ public class BattleMapTest {
     Point point = new Point(1, 1);
     States sunkCellState = States.SUNK;
 
-    assertThrows(InvalidParameterException.class, () -> battleMap.setCellState(point, sunkCellState));
+    assertThrows(InvalidParameterException.class, () -> battleMap.set_cell_state(point, sunkCellState));
   }
 
   @Test
@@ -154,9 +153,9 @@ public class BattleMapTest {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States healthyCellState = States.HEALTHY;
-    battleMap.setCellState(point, healthyCellState);
+    battleMap.set_cell_state(point, healthyCellState);
 
-    assertEquals(healthyCellState.getValue(), battleMap.getAt(point), "No ship found at " + point);
+    assertEquals(healthyCellState.getValue(), battleMap.get_at(point), "No ship found at " + point);
   }
 
   @Test
@@ -166,39 +165,87 @@ public class BattleMapTest {
     Point point = new Point(1, 1);
     States healthyCellState = States.HEALTHY;
     States hitCellState = States.HIT;
-    battleMap.setCellState(point, healthyCellState);
-    battleMap.setCellState(point, hitCellState);
+    battleMap.set_cell_state(point, healthyCellState);
+    battleMap.set_cell_state(point, hitCellState);
 
-    assertEquals(hitCellState.getValue(), battleMap.getAt(point), "No hit position found at " + point);
+    assertEquals(hitCellState.getValue(), battleMap.get_at(point), "No hit position found at " + point);
   }
 
   @Test
   @DisplayName("An hit cell can be set as sunk")
-  void setCellStateChangingFromHitToSunk() {
+  void an_hit_cell_can_be_set_as_sunk() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States healthyCellState = States.HEALTHY;
     States hitCellState = States.HIT;
     States sunkCellState = States.SUNK;
-    battleMap.setCellState(point, healthyCellState);
-    battleMap.setCellState(point, hitCellState);
-    battleMap.setCellState(point, sunkCellState);
+    battleMap.set_cell_state(point, healthyCellState);
+    battleMap.set_cell_state(point, hitCellState);
+    battleMap.set_cell_state(point, sunkCellState);
 
-    assertEquals(sunkCellState.getValue(), battleMap.getAt(point), "No sunk position found at " + point);
+    assertEquals(sunkCellState.getValue(), battleMap.get_at(point), "No sunk position found at " + point);
   }
 
   @Test
   @DisplayName("An healthy cell can be set as sunk only for lone")
-  void setCellStateChangingFromHealthyToSunkOnlyForLone() {
+  void an_healthy_cell_can_be_set_as_sunk_only_for_lone() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States healthyCellState = States.HEALTHY;
     States hitCellState = States.HIT;
     States sunkCellState = States.SUNK;
-    battleMap.setCellState(point, healthyCellState);
-    battleMap.setCellState(point, hitCellState);
-    battleMap.setCellState(point, sunkCellState);
+    battleMap.set_cell_state(point, healthyCellState);
+    battleMap.set_cell_state(point, hitCellState);
+    battleMap.set_cell_state(point, sunkCellState);
 
-    assertEquals(sunkCellState.getValue(), battleMap.getAt(point), "No sunk position found at " + point);
+    assertEquals(sunkCellState.getValue(), battleMap.get_at(point), "No sunk position found at " + point);
+  }
+
+  @Test
+  @DisplayName("A empty cell has to be free")
+  void a_empty_cell_has_to_be_free() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+
+    assertEquals(false, battleMap.check_if_the_cell_is_busy(point), "An empty cell is busy");
+  }
+
+  @Test
+  @DisplayName("A healthy cell has to be busy")
+  void a_healthy_cell_has_to_be_busy() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    States healthyCellState = States.HEALTHY;
+    battleMap.set_cell_state(point, healthyCellState);
+
+    assertEquals(true, battleMap.check_if_the_cell_is_busy(point), "A healthy cell is not busy");
+  }
+
+  @Test
+  @DisplayName("A hit cell has to be busy")
+  void a_hit_cell_has_to_be_busy() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    battleMap.set_cell_state(point, healthyCellState);
+    battleMap.set_cell_state(point, hitCellState);
+
+    assertEquals(true, battleMap.check_if_the_cell_is_busy(point), "A hit cell is not busy");
+  }
+
+  @Test
+  @DisplayName("A sunk cell has to be busy")
+  void a_sunk_cell_has_to_be_busy() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    States healthyCellState = States.HEALTHY;
+    States hitCellState = States.HIT;
+    States sunkCellState = States.SUNK;
+    battleMap.set_cell_state(point, healthyCellState);
+    battleMap.set_cell_state(point, hitCellState);
+    battleMap.set_cell_state(point, sunkCellState);
+
+    assertEquals(true, battleMap.check_if_the_cell_is_busy(point), "A sunk cell state is not busy");
   }
 }
