@@ -30,6 +30,6 @@ public class BattleMap {
   }
 
   public boolean check_if_the_cell_is_busy(Point point) {
-    return get_at(point) >= 1;
+    return get_at(point) != 0;
   }
 }
