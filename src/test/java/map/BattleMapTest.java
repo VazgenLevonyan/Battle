@@ -12,7 +12,7 @@ public class BattleMapTest {
   @Test
   @DisplayName("A fresh map should contain just 0-s")
 
-  void aFreshMapShouldContainJustZeros() {
+  void a_fresh_map_should_contain_just_zeros() {
     BattleMap battleMap = new BattleMap(3);
     final Integer nonZeroElements = battleMap.map.stream().filter(e -> e != 0).collect(Collectors.toList()).size();
 
@@ -21,14 +21,14 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("Map size cannot be zero or negative")
-  void mapSize() {
+  void map_size() {
 
     assertThrows(InvalidParameterException.class, () -> new BattleMap(-3));
   }
 
   @Test
   @DisplayName("Any field in an empty battle map should be 0")
-  void allFieldsInAnEmptyBattlefieldShouldBeZeros() {
+  void all_fields_in_an_empty_battlefield_should_be_zeros() {
     final Integer size = 3;
     final BattleMap battleMap = new BattleMap(size);
     Integer sum = 0;
@@ -44,7 +44,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("A Healthy cell can not be changed to Free")
-  void setCellStateChangingFromHealthyToFree() {
+  void set_cell_state_changing_from_healthy_to_free() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
@@ -56,7 +56,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("A Hit cell can not be changed to Healthy")
-  void setCellStateChangingFromHitToHealthy() {
+  void set_cell_state_changing_from_hit_to_healthy() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
@@ -69,7 +69,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("A Hit cell can not be changed to Free")
-  void setCellStateChangingFromHitToFree() {
+  void set_cell_state_changing_from_hit_to_free() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
@@ -83,7 +83,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("A Sunk cell can not be changed to Hit")
-  void setCellStateChangingFromSunkToHit() {
+  void set_cell_state_changing_from_sunk_to_hit() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
@@ -98,7 +98,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("A Sunk cell can not be changed to Healthy")
-  void setCellStateChangingFromSunkToHealthy() {
+  void set_cell_state_changing_from_sunk_to_healthy() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States healthyCellState = States.HEALTHY;
@@ -113,7 +113,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("A Sunk cell can not ve changed to Free")
-  void setCellStateChangingFromSunkToFree() {
+  void set_cell_state_changing_from_sunk_to_free() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(2, 2);
     States freeCellState = States.FREE;
@@ -129,7 +129,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("An empty cell cannot be set to hit")
-  void setCellStateChangingFromFreeToHit() {
+  void set_cell_state_changing_from_free_to_hit() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States hitCellState = States.HIT;
@@ -139,7 +139,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("An empty cell cannot be set to sunk")
-  void setCellStateChangingFromFreeToSunk() {
+  void set_cell_state_changing_from_free_to_sunk() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States sunkCellState = States.SUNK;
@@ -149,7 +149,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("An empty cell can be set as healthy")
-  void setCellStateChangingFromFreeToHealthy() {
+  void set_cell_state_changing_from_free_to_healthy() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States healthyCellState = States.HEALTHY;
@@ -160,7 +160,7 @@ public class BattleMapTest {
 
   @Test
   @DisplayName("An healthy cell can be set as hit")
-  void setCellStateChangingFromHealthyToHit() {
+  void set_cell_state_changing_from_healthy_to_hit() {
     BattleMap battleMap = new BattleMap(5);
     Point point = new Point(1, 1);
     States healthyCellState = States.HEALTHY;
