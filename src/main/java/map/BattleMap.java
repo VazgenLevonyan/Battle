@@ -32,4 +32,25 @@ public class BattleMap {
   public boolean check_if_the_cell_is_busy(Point point) {
     return get_at(point) != 0;
   }
+
+  public List<Point> create_ship_positions(Point point, int length, boolean horizontal) {
+    List<Point> points = new ArrayList<>();
+    int i = 0;
+    while (i < length) {
+      if (horizontal) {
+        if (point.y + i >= size)
+          throw new InvalidParameterException("The ship positions rely on a given length are out of map size");
+        Point point1 = new Point(point.x, point.y + i);
+        points.add(point1);
+        i++;
+      } else {
+        if (point.x + i >= size)
+          throw new InvalidParameterException("The ship positions rely on a given length are out of map size");
+        Point point1 = new Point(point.x + i, point.y);
+        points.add(point1);
+        i++;
+      }
+    }
+    return points;
+  }
 }

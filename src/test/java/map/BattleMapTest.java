@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -247,5 +249,209 @@ public class BattleMapTest {
     battleMap.set_cell_state(point, sunkCellState);
 
     assertEquals(true, battleMap.check_if_the_cell_is_busy(point), "A sunk cell state is not busy");
+  }
+
+  @Test
+  @DisplayName("Create positions for ship which length is 1")
+  void create_positions_for_ship_which_length_is_1_in_horizontal() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    int length = 1;
+    boolean horizontal = true;
+    List<Point> pointList = new ArrayList<>();
+    pointList.add(new Point(2, 2));
+
+    assertEquals(battleMap.create_ship_positions(point, length, horizontal), pointList, "Mi ban en chi");
+  }
+
+  @Test
+  @DisplayName("In case when ship length is 1 in horizontal and positions are out of map size")
+  void in_case_when_ship_length_is_1_and_in_horizontal_positions_bounds_are_out_of_map_size() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 5);
+    int length = 1;
+    boolean horizontal = true;
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.create_ship_positions(point, length, horizontal));
+  }
+
+  @Test
+  @DisplayName("Create positions for ship which length is 1 in vertical")
+  void create_positions_for_ship_which_length_is_1_in_vertical() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    int length = 1;
+    boolean horizontal = false;
+    List<Point> pointList = new ArrayList<>();
+    pointList.add(new Point(2, 2));
+
+    assertEquals(battleMap.create_ship_positions(point, length, horizontal), pointList, "Mi ban en chi");
+  }
+
+  @Test
+  @DisplayName("In case when ship length is 1 in vertical and positions are out of map size")
+  void in_case_when_ship_length_is_1_and_in_vertical_positions_bounds_are_out_of_map_size() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(5, 2);
+    int length = 1;
+    boolean horizontal = false;
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.create_ship_positions(point, length, horizontal));
+  }
+
+  @Test
+  @DisplayName("Create positions for ship which length is 2")
+  void create_positions_for_ship_which_length_is_2_in_horizonntal() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    int length = 2;
+    boolean horizontal = true;
+    List<Point> pointList = new ArrayList<>();
+    pointList.add(new Point(2, 2));
+    pointList.add(new Point(2, 3));
+
+    assertEquals(battleMap.create_ship_positions(point, length, horizontal), pointList, "Mi ban en chi");
+  }
+
+  @Test
+  @DisplayName("In case when ship length is 2 in horizontal and positions are out of map size")
+  void in_case_when_ship_length_is_2_and_in_horizontal_positions_bounds_are_out_of_map_size() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 4);
+    int length = 2;
+    boolean horizontal = true;
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.create_ship_positions(point, length, horizontal));
+  }
+
+  @Test
+  @DisplayName("Create positions for ship which length is 2 in vertical")
+  void create_positions_for_ship_which_length_is_2_in_vertical() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    int length = 2;
+    boolean horizontal = false;
+    List<Point> pointList = new ArrayList<>();
+    pointList.add(new Point(2, 2));
+    pointList.add(new Point(3, 2));
+
+    assertEquals(battleMap.create_ship_positions(point, length, horizontal), pointList, "Mi ban en chi");
+  }
+
+  @Test
+  @DisplayName("In case when ship length is 2 in vertical and positions are out of map size")
+  void in_case_when_ship_length_is_2_and_in_vertical_positions_bounds_are_out_of_map_size() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(4, 2);
+    int length = 2;
+    boolean horizontal = false;
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.create_ship_positions(point, length, horizontal));
+  }
+
+  @Test
+  @DisplayName("Create positions for ship which length is 3")
+  void create_positions_for_ship_which_length_is_3_in_horizonntal() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    int length = 3;
+    boolean horizontal = true;
+    List<Point> pointList = new ArrayList<>();
+    pointList.add(new Point(2, 2));
+    pointList.add(new Point(2, 3));
+    pointList.add(new Point(2, 4));
+
+    assertEquals(battleMap.create_ship_positions(point, length, horizontal), pointList, "Mi ban en chi");
+  }
+
+  @Test
+  @DisplayName("In case when ship length is 3 in horizontal and positions are out of map size")
+  void in_case_when_ship_length_is_3_and_in_horizontal_positions_bounds_are_out_of_map_size() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 3);
+    int length = 3;
+    boolean horizontal = true;
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.create_ship_positions(point, length, horizontal));
+  }
+
+  @Test
+  @DisplayName("Create positions for ship which length is 3 in vertical")
+  void create_positions_for_ship_which_length_is_3_in_vertical() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 2);
+    int length = 3;
+    boolean horizontal = false;
+    List<Point> pointList = new ArrayList<>();
+    pointList.add(new Point(2, 2));
+    pointList.add(new Point(3, 2));
+    pointList.add(new Point(4, 2));
+
+    assertEquals(battleMap.create_ship_positions(point, length, horizontal), pointList, "Mi ban en chi");
+  }
+
+  @Test
+  @DisplayName("In case when ship length is 3 in vertical and positions are out of map size")
+  void in_case_when_ship_length_is_3_and_in_vertical_positions_bounds_are_out_of_map_size() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(3, 2);
+    int length = 3;
+    boolean horizontal = false;
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.create_ship_positions(point, length, horizontal));
+  }
+
+  @Test
+  @DisplayName("Create positions for ship which length is 4")
+  void create_positions_for_ship_which_length_is_4_in_horizonntal() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    int length = 4;
+    boolean horizontal = true;
+    List<Point> pointList = new ArrayList<>();
+    pointList.add(new Point(1, 1));
+    pointList.add(new Point(1, 2));
+    pointList.add(new Point(1, 3));
+    pointList.add(new Point(1, 4));
+
+    assertEquals(battleMap.create_ship_positions(point, length, horizontal), pointList, "Mi ban en chi");
+  }
+
+  @Test
+  @DisplayName("In case when ship length is 3 in horizontal and positions are out of map size")
+  void in_case_when_ship_length_is_4_and_in_horizontal_positions_bounds_are_out_of_map_size() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 2);
+    int length = 4;
+    boolean horizontal = true;
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.create_ship_positions(point, length, horizontal));
+  }
+
+  @Test
+  @DisplayName("Create positions for ship which length is 4 in vertical")
+  void create_positions_for_ship_which_length_is_4_in_vertical() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    int length = 4;
+    boolean horizontal = false;
+    List<Point> pointList = new ArrayList<>();
+    pointList.add(new Point(1, 1));
+    pointList.add(new Point(2, 1));
+    pointList.add(new Point(3, 1));
+    pointList.add(new Point(4, 1));
+
+    assertEquals(battleMap.create_ship_positions(point, length, horizontal), pointList, "Mi ban en chi");
+  }
+
+  @Test
+  @DisplayName("In case when ship length is 4 in vertical and positions are out of map size")
+  void in_case_when_ship_length_is_4_and_in_vertical_positions_bounds_are_out_of_map_size() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(2, 1);
+    int length = 4;
+    boolean horizontal = false;
+
+    assertThrows(InvalidParameterException.class, () -> battleMap.create_ship_positions(point, length, horizontal));
   }
 }
