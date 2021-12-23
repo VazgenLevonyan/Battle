@@ -670,4 +670,30 @@ public class BattleMapTest {
     assertEquals(battleMap.create_ship_positions(point, length, horizontal), pointList,
         "It is possible to create ship coordinate with the given data");
   }
+
+  @Test
+  @DisplayName("The cell suroundings of Point(1:1) for 4 length ship is empty")
+  void the_cell_surrounding_for_four_length_ship_is_empty() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(0, 1);
+    boolean horizontal = true;
+    int length = 4;
+
+    assertEquals(true, battleMap.check_if_the_cell_surrounding_is_empty(point, length, horizontal),
+        "The cell suroundings of Point(1:1) for 4 length ship is  not empty");
+  }
+
+  @Test
+  @DisplayName("The cell suroundings of Point(1:1) for 4 length ship is not empty")
+  void the_cell_surrounding_is_not_empty() {
+    BattleMap battleMap = new BattleMap(5);
+    Point point = new Point(1, 1);
+    Point point1 = new Point(1, 0);
+    battleMap.set_cell_state(point1, States.HEALTHY);
+    boolean horizontal = false;
+    int length = 4;
+
+    assertEquals(false, battleMap.check_if_the_cell_surrounding_is_empty(point, length, horizontal),
+        "The cell suroundings of Point(1:1) for 4 length ship is empty");
+  }
 }
