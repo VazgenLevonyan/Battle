@@ -3,7 +3,10 @@ package map;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class BattleMap {
   public final List<Integer> map = new ArrayList<Integer>();
@@ -45,5 +48,32 @@ public class BattleMap {
       }
     }
     return pointList;
+  }
+
+  public List<Point> create_surronding_coordinates_list(List<Point> pointList) {
+    List<Point> pointList2 = new ArrayList<Point>();
+    for (Point p : pointList) {
+
+      pointList2.add(new Point(p.x, p.y - 1));
+      pointList2.add(new Point(p.x - 1, p.y));
+      pointList2.add(new Point(p.x, p.y + 1));
+      pointList2.add(new Point(p.x + 1, p.y));
+    }
+    return pointList2;
+  }
+
+  public boolean check_if_the_cell_surrounding_is_empty(Point point, int length, boolean horizontal) {
+    List<Point> shipPositions = create_ship_positions(point, length, horizontal);
+    List<Point> listOfSurroundingsPoints = create_surronding_coordinates_list(shipPositions);
+    Set<Point> setOfSurroundingsPoints = new HashSet<Point>(listOfSurroundingsPoints);
+    setOfSurroundingsPoints.removeAll(shipPositions);
+    List<Point> filteredSurroundingsPointList = setOfSurroundingsPoints.stream()
+        .filter(p -> p.x >= 0 && p.x < size && p.y >= 0 && p.y < size).collect(Collectors.toList());
+
+    for (Point p : filteredSurroundingsPointList) {
+      if (check_if_the_cell_is_busy(p))
+        return false;
+    }
+    return true;
   }
 }
